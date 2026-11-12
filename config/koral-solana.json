@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-product-adoption-pending",
+  "owner": "tidemark-labs",
+  "allowedTypes": [
+    "feat",
+    "fix",
+    "perf",
+    "refactor",
+    "test",
+    "docs",
+    "build",
+    "ci",
+    "chore",
+    "revert"
+  ],
+  "allowedScopes": [
+    "language",
+    "compiler",
+    "runtime",
+    "toolchain",
+    "cli",
+    "gradle",
+    "tests",
+    "benchmarks",
+    "docs",
+    "build",
+    "ci",
+    "release",
+    "deps",
+    "handbook"
+  ],
+  "bodyRequiredTypes": [
+    "feat",
+    "fix",
+    "perf"
+  ],
+  "headerMax": 72,
+  "pins": {
+    "kotlin": "2.2.21",
+    "gradle": "8.14.6",
+    "gradleSha256": "7988ed071b2a07900e2ec715fca15c6ab72bce6db433af301fa7fa7e9407bd24",
+    "buildJdk": 17,
+    "productVersion": "0.1.0-dev",
+    "nodeMinimum": ">=22.12"
+  },
+  "proposedQualification": {
+    "cliJdk": [
+      17,
+      21
+    ],
+    "vmTestNode": [
+      22,
+      24
+    ],
+    "platforms": [
+      "linux-x64",
+      "macos-arm64"
+    ],
+    "canaryJdk": [
+      25
+    ],
+    "canaryNode": [
+      26
+    ],
+    "qualifiedMatrixAlreadyExecuted": false
+  },
+  "requiredJobs": [
+    "policy",
+    "unit",
+    "sbf-integration",
+    "consumer-install",
+    "compatibility"
+  ],
+  "publishedGradlePluginExists": false,
+  "releaseRequiredJobs": [
+    "policy",
+    "unit",
+    "sbf-integration",
+    "consumer-install",
+    "compatibility",
+    "benchmarks",
+    "artifact-integrity",
+    "release-authorization"
+  ]
+}

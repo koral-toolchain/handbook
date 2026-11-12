@@ -1,0 +1,39 @@
+name: Handbook policy
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: handbook-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  policy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - run: python3 tools/policy.py handbook
+      - run: python3 -m unittest discover -s tests -v
+      - name: Validate proposed message
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          python3 - <<'PY'
+          import os, subprocess
+          from pathlib import Path
+          if os.environ['EVENT']=='pull_request':
+              text=os.environ['PR_TITLE']+'\n\n'+os.environ['PR_BODY']
+          else:
+              text=subprocess.check_output(['git','log','-1','--format=%B'],text=True)
+          Path('/tmp/koral-commit.txt').write_text(text)
+          PY
+          python3 tools/policy.py commit --message-file /tmp/koral-commit.txt

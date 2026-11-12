@@ -1,0 +1,14 @@
+name: Koral declaration policy
+description: Check the compiler's explicit version pins and identity against this handbook revision.
+inputs:
+  repository-path:
+    description: Path to the compiler project root, not the studio root
+    required: true
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        POLICY_ROOT: ${{ github.action_path }}/../../..
+        PRODUCT_ROOT: ${{ inputs.repository-path }}
+      run: python3 "$POLICY_ROOT/tools/policy.py" versions --repo "$PRODUCT_ROOT"
