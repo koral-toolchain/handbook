@@ -10,4 +10,4 @@ Performance changes compare equivalent inputs/state/permissions against independ
 
 A changed budget needs the owner to review the before/after evidence. Correctness failures are unconditional failures; an expected cost increase for additional validation must be explained, not hidden by updating a baseline automatically.
 
-The product repository remains private and empty during this handbook preparation. Its source upload, public release, own-source license, Gradle plugin and package publishing are separate pending work.
+The owner has selected proprietary, all-rights-reserved terms for original Koral code and closed external contributions during initial development. Third-party components retain their own licenses. The product repository remains private and empty; product source now contains CI definitions pending its first upload and hosted run. Public release, a Gradle plugin and package publishing remain separate pending work.
