@@ -10,7 +10,7 @@ Performance changes compare equivalent inputs/state/permissions against independ
 
 A changed budget needs the owner to review the before/after evidence. Correctness failures are unconditional failures; an expected cost increase for additional validation must be explained, not hidden by updating a baseline automatically.
 
-The owner has selected proprietary, all-rights-reserved terms for original Koral code and closed external contributions during initial development. Third-party components retain their own licenses. The product source is publicly visible at `koral-toolchain/koral-solana` with proprietary terms. A Gradle plugin and package publishing remain separate pending work.
+The owner has selected proprietary, all-rights-reserved terms for original Koral code and closed external contributions during initial development. Third-party components retain their own licenses. The product source is publicly visible at `koral-toolchain/koral-solana` with proprietary terms. A Gradle plugin and Maven/Plugin Portal publishing remain separate pending work.
 
 ## Initial hosted CI evidence
 
@@ -31,3 +31,24 @@ reserved and external contributions closed. Main requires a current passing
 `required` check from GitHub Actions and a pull request, including for administrators.
 Force pushes and branch deletion are disabled. The sole owner needs zero additional
 approvals for their own PR; CI and resolved review conversations remain required.
+
+## First published installation preview
+
+[v0.1.0-dev](https://github.com/koral-toolchain/koral-solana/releases/tag/v0.1.0-dev)
+is an owner-published GitHub prerelease from
+`28a621676da319ca2d5f4dc060a14fa211ff95ba`, following successful main
+[CI 43176353560](https://github.com/koral-toolchain/koral-solana/actions/runs/43176353560).
+The exact candidate TAR was promoted without rebuilding. It contains complete
+upstream license/notice texts and the first-project/SDK guides. Public asset
+bytes were downloaded anonymously and matched SHA256SUMS.
+
+The owner also verified the same TAR on macOS arm64, reran the selected Counter
+and payment comparisons with the candidate compiler JAR, and checked deliberate
+incorrect-payment rejection. BENCHMARKS.json preserves scope and auxiliary
+semantic differences; RELEASE-PROVENANCE.json records the CI artifact and manual
+promotion evidence. This is not a signed SLSA attestation or an independent audit.
+
+Release tags matching v* reject updates/deletion through an active tag ruleset
+with no bypass actors. Publication is currently owner-initiated manual promotion,
+not an automatic GitHub publishing workflow. Original Koral usage permissions
+remain restricted by LICENSE; release publication does not grant additional rights.

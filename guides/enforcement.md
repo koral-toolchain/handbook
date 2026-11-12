@@ -12,7 +12,7 @@ A rule is enforced only where a concrete tool and the necessary server setting a
 | Real SBF/VM regressions | Product integration job | Hosted full integration passed; see compiler profile |
 | Consumer package installation | Product archive jobs | Hosted CLI extraction/install/run passed; Gradle plugin does not yet exist |
 | Owner-only maintenance | CODEOWNERS, owner-only CI, protected main | Public compiler main requires PR + passing Actions gate, including admins; zero additional approvals for sole owner |
-| Public namespace/license and release approval | Owner plus release workflow | Publication not configured |
+| Release approval and original-source terms | Owner-authenticated manual promotion and release gate | First GitHub prerelease published; Maven/Plugin Portal and automatic publication not configured |
 | Website OIDC/SSM rollout and rollback | Separate website workflow | Implemented and live-tested |
 
 The handbook CI checks its own policy and positive/negative cases. The compiler explicitly pins and consumes the checker with actual product tests. Other repositories still need their own integration. The public compiler now makes the gate mandatory through server settings. This does not make GitHub Free private branch protection work for other repositories.
