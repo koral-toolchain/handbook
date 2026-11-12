@@ -2,7 +2,7 @@
 
 How Koral projects accept changes, verify compatibility, and ship releases.
 
-This is a private organization handbook. The sole human reviewer and release authority is **@tidemark-labs**. Policies for the compiler are prepared for adoption; this handbook does not mean that the currently empty product repository already has CI or protected branches.
+This is the public development handbook for the Koral organization. The sole human reviewer and release authority is **@tidemark-labs**. Policies for the compiler are prepared for adoption; this handbook does not mean that the currently empty product repository already has CI or protected branches.
 
 ## Read the handbook
 
