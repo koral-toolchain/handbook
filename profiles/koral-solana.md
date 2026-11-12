@@ -10,19 +10,24 @@ Performance changes compare equivalent inputs/state/permissions against independ
 
 A changed budget needs the owner to review the before/after evidence. Correctness failures are unconditional failures; an expected cost increase for additional validation must be explained, not hidden by updating a baseline automatically.
 
-The owner has selected proprietary, all-rights-reserved terms for original Koral code and closed external contributions during initial development. Third-party components retain their own licenses. The product source is uploaded privately to `koral-toolchain/koral-solana`. Public release, a Gradle plugin and package publishing remain separate pending work.
+The owner has selected proprietary, all-rights-reserved terms for original Koral code and closed external contributions during initial development. Third-party components retain their own licenses. The product source is publicly visible at `koral-toolchain/koral-solana` with proprietary terms. A Gradle plugin and package publishing remain separate pending work.
 
 ## Initial hosted CI evidence
 
 Source revision `ec5b71e4c15b11a09316e58801d8abee4a433cd3` passed
 [Product CI run 43163819871](https://github.com/koral-toolchain/koral-solana/actions/runs/43163819871).
-This private run verifies policy, unit/build, native SBF integration, candidate
+This run verifies policy, unit/build, native SBF integration, candidate
 installation, compatibility and the final required gate on Ubuntu 24.04 x64.
 The native integration job executes the full 53-check harness; consumer jobs
 execute Counter and System payment verification from the same candidate TAR.
 
 The tested runtime pairs are JDK 17 with Node 22 and JDK 21 with Node 24.
 This does not establish all JVM/Node combinations, hosted macOS/Windows support,
-the broader proposed qualification matrix, package publication or protected
-private branches. The pipeline uses read-only contents permission and has no
+the broader proposed qualification matrix, package publication or additional platform support. The pipeline uses read-only contents permission and has no
 deployment credentials or publishing job.
+
+The owner made the source repository public on 2026-11-12 while keeping all rights
+reserved and external contributions closed. Main requires a current passing
+`required` check from GitHub Actions and a pull request, including for administrators.
+Force pushes and branch deletion are disabled. The sole owner needs zero additional
+approvals for their own PR; CI and resolved review conversations remain required.

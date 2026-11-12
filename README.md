@@ -2,7 +2,7 @@
 
 How Koral projects accept changes, verify compatibility, and ship releases.
 
-This is the public development handbook for the Koral organization. The sole human reviewer and release authority is **@tidemark-labs**. The private compiler repository now runs product CI against a pinned handbook revision. Passing CI does not mean that protected branches or package publication are configured.
+This is the public development handbook for the Koral organization. The sole human reviewer and release authority is **@tidemark-labs**. The public compiler repository now runs product CI against a pinned handbook revision. Passing CI does not mean that protected branches or package publication are configured.
 
 ## Read the handbook
 

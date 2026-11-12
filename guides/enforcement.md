@@ -11,11 +11,11 @@ A rule is enforced only where a concrete tool and the necessary server setting a
 | Actual JVM/Node compatibility | Product execution jobs | Linux JDK 17/Node 22 and JDK 21/Node 24 pairs passed; broader targets pending |
 | Real SBF/VM regressions | Product integration job | Hosted full integration passed; see compiler profile |
 | Consumer package installation | Product archive jobs | Hosted CLI extraction/install/run passed; Gradle plugin does not yet exist |
-| Owner-only review | CODEOWNERS plus protected rules | Owner decision; private Free enforcement limitation |
+| Owner-only maintenance | CODEOWNERS, owner-only CI, protected main | Public compiler main requires PR + passing Actions gate, including admins; zero additional approvals for sole owner |
 | Public namespace/license and release approval | Owner plus release workflow | Publication not configured |
 | Website OIDC/SSM rollout and rollback | Separate website workflow | Implemented and live-tested |
 
-The handbook CI checks its own policy and positive/negative cases. The compiler explicitly pins and consumes the checker with actual product tests. Other repositories still need their own integration. Neither pipeline makes GitHub Free private branch protection work; make the gate mandatory through server settings where supported.
+The handbook CI checks its own policy and positive/negative cases. The compiler explicitly pins and consumes the checker with actual product tests. Other repositories still need their own integration. The public compiler now makes the gate mandatory through server settings. This does not make GitHub Free private branch protection work for other repositories.
 
 Do not count a skipped required result as success. Keep a stable final gate name so a matrix-label change does not leave stale protection rules. Audit server rules through the API when adopting or changing them; comments in CODEOWNERS are not proof.
 
