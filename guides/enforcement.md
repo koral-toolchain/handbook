@@ -5,17 +5,17 @@ A rule is enforced only where a concrete tool and the necessary server setting a
 | Rule | Executable control | Current status |
 | --- | --- | --- |
 | Handbook/configuration consistency | `tools/policy.py handbook` | Implemented here |
-| Commit shape/body/breaking marker | `tools/policy.py commit` | Implemented; product CI wiring pending |
+| Commit shape/body/breaking marker | `tools/policy.py commit` | Wired into owner-only product CI |
 | Current compiler/Gradle/CLI version agreement | `tools/policy.py versions` | Implemented; check declarations, not runtime execution |
-| Missing/failed/skipped required results | `tools/policy.py gate` | Implemented; product release workflow wiring pending |
-| Actual JVM/Node compatibility | Product execution matrix | Proposed qualification; no matrix has run here |
-| Real SBF/VM regressions | Existing product tests, future required CI jobs | Local evidence exists; product Actions pending |
-| Consumer package installation | Product archive/TestKit jobs | CLI test design; plugin does not yet exist |
+| Missing/failed/skipped required results | `tools/policy.py gate` | Product final required gate active; release workflow pending |
+| Actual JVM/Node compatibility | Product execution jobs | Linux JDK 17/Node 22 and JDK 21/Node 24 pairs passed; broader targets pending |
+| Real SBF/VM regressions | Product integration job | Hosted full integration passed; see compiler profile |
+| Consumer package installation | Product archive jobs | Hosted CLI extraction/install/run passed; Gradle plugin does not yet exist |
 | Owner-only review | CODEOWNERS plus protected rules | Owner decision; private Free enforcement limitation |
 | Public namespace/license and release approval | Owner plus release workflow | Publication not configured |
 | Website OIDC/SSM rollout and rollback | Separate website workflow | Implemented and live-tested |
 
-The handbook CI checks its own policy and positive/negative cases. It cannot silently install the product pipeline or make GitHub Free private branch protection work. A consumer must explicitly pin and wire the policy action, add actual tests, and make the gate mandatory where supported.
+The handbook CI checks its own policy and positive/negative cases. The compiler explicitly pins and consumes the checker with actual product tests. Other repositories still need their own integration. Neither pipeline makes GitHub Free private branch protection work; make the gate mandatory through server settings where supported.
 
 Do not count a skipped required result as success. Keep a stable final gate name so a matrix-label change does not leave stale protection rules. Audit server rules through the API when adopting or changing them; comments in CODEOWNERS are not proof.
 

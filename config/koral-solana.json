@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "draft-product-adoption-pending",
+  "status": "initial-product-ci-adopted",
   "owner": "tidemark-labs",
   "allowedTypes": [
     "feat",

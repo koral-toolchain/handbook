@@ -14,7 +14,7 @@ The pipeline checks the product that a developer receives, not only its source t
 | Performance | Correctness-equivalent CU comparison with fixed provenance | Affected compiler/runtime PRs and releases |
 | Release | Complete matrix, distribution, version and publication checks | Owner-requested release |
 
-Product job implementations are pending adoption. [The compiler profile](../profiles/koral-solana.md) separates known local evidence from these targets.
+The initial product CI is installed and has passed a hosted run. [The compiler profile](../profiles/koral-solana.md) records the exact tested pairs and source revision. The broader qualification targets and release jobs are not all implemented by that initial pipeline.
 
 ## Failure means failure
 

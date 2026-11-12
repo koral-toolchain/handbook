@@ -2,7 +2,7 @@
 
 How Koral projects accept changes, verify compatibility, and ship releases.
 
-This is the public development handbook for the Koral organization. The sole human reviewer and release authority is **@tidemark-labs**. Policies for the compiler are prepared for adoption; this handbook does not mean that the currently empty product repository already has CI or protected branches.
+This is the public development handbook for the Koral organization. The sole human reviewer and release authority is **@tidemark-labs**. The private compiler repository now runs product CI against a pinned handbook revision. Passing CI does not mean that protected branches or package publication are configured.
 
 ## Read the handbook
 
@@ -35,7 +35,7 @@ python3 tools/policy.py gate --needs-file /path/to/job-results.json
 
 A successful `versions` check verifies declared pins and version consistency. It does **not** prove that a program ran on every candidate runtime. Runtime support requires actual execution evidence.
 
-The handbook's own Actions workflow runs its checks. The reusable policy action is supplied for later installation in the product pipeline. Product unit/VM/consumer CI, package publication and GitHub merge enforcement are not installed by creating this handbook.
+The handbook's own Actions workflow runs its checks. Product CI checks out an immutable handbook revision and executes the policy checker alongside unit, native VM, consumer and compatibility jobs. A reusable policy action is also available for other consumers. Package publication and GitHub merge enforcement remain separate configuration steps; see the [enforcement map](guides/enforcement.md).
 
 GitHub Free organization plans do not enforce protected branches for private repositories. Keep repositories private unless the owner explicitly changes that decision; do not buy a plan or claim that a failing check blocks every admin push. Release jobs must additionally depend on successful gates.
 
