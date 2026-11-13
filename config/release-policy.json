@@ -1,0 +1,25 @@
+{
+  "schema": "koral-release-policy/1",
+  "revision": 1,
+  "releaseOwner": "tidemark-labs",
+  "channels": [
+    "preview",
+    "stable"
+  ],
+  "reviewEveryDays": 14,
+  "automaticPublication": false,
+  "publicationConditions": [
+    "required-ci",
+    "candidate-install",
+    "behavior-regression",
+    "documentation",
+    "artifact-integrity",
+    "owner-approval"
+  ],
+  "announcementMode": "selective-user-outcome",
+  "urgentReasons": [
+    "security",
+    "incorrect-results",
+    "installation-blocked"
+  ]
+}

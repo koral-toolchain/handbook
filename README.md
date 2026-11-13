@@ -14,7 +14,7 @@ This is the public development handbook for the Koral organization. The sole hum
 | [CI](guides/ci.md) | Fast checks, VM integration, artifacts and mandatory gates |
 | [Compatibility](guides/compatibility.md) | Build tools versus supported consumer runtimes |
 | [Versioning](guides/versioning.md) | Product/API/ABI changes and version consistency |
-| [Releases](guides/releases.md) | Candidate verification, publication and recovery |
+| [Release policy v1](guides/releases.md) | Release readiness, preview/stable, grouped announcements, urgent fixes and candidate promotion |
 | [Security](guides/security.md) | Untrusted contributions, credentials and supply chain |
 | [Enforcement map](guides/enforcement.md) | Which statements are checked, reviewed or still pending |
 | [Compiler profile](profiles/koral-solana.md) | Current compiler facts and proposed qualification matrix |

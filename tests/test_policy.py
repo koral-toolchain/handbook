@@ -33,6 +33,26 @@ class PolicyTests(unittest.TestCase):
         p.check_gate(needs,stage='release')
         needs['artifact-integrity']={'result':'skipped'}
         with self.assertRaises(ValueError):p.check_gate(needs,stage='release')
+    def release_policy(self):
+        return json.loads((p.ROOT/'config/release-policy.json').read_text())
+    def test_accepts_release_policy_v1(self):
+        p.check_release_policy(self.release_policy(), 'tidemark-labs')
+    def test_release_policy_rejects_missing_evidence_conditions(self):
+        for condition in self.release_policy()['publicationConditions']:
+            bad=self.release_policy();bad['publicationConditions'].remove(condition)
+            with self.subTest(condition=condition),self.assertRaises(ValueError):
+                p.check_release_policy(bad, 'tidemark-labs')
+    def test_release_policy_rejects_implicit_approval_or_publication(self):
+        for field,value in [('releaseOwner','another-owner'),('automaticPublication',True),
+                            ('channels',['stable']),('announcementMode','every-pr')]:
+            bad=self.release_policy();bad[field]=value
+            with self.subTest(field=field),self.assertRaises(ValueError):
+                p.check_release_policy(bad, 'tidemark-labs')
+    def test_release_policy_retains_urgent_fixes_and_valid_review_interval(self):
+        for field,value in [('urgentReasons',[]),('reviewEveryDays',0),('reviewEveryDays',True)]:
+            bad=self.release_policy();bad[field]=value
+            with self.subTest(field=field),self.assertRaises(ValueError):
+                p.check_release_policy(bad, 'tidemark-labs')
     def fixture(self,root):
         files={'build.gradle.kts':'plugins { kotlin("jvm") version "2.2.21" }\nversion = "0.1.0-dev"\njvmToolchain(17)\n','compiler/build.gradle.kts':'implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21")','gradle/wrapper/gradle-wrapper.properties':'distributionUrl=https://services.gradle.org/distributions/gradle-8.14.6-bin.zip\ndistributionSha256Sum='+p.config()['pins']['gradleSha256']+'\n','cli/src/main/kotlin/dev/koral/cli/Main.kt':'println("Koral 0.1.0-dev\\n")\n"compiler" to "koral-0.1.0-dev"','testing/package.json':json.dumps({'engines':{'node':'>=22.12'}})}
         for name,text in files.items():

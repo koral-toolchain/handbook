@@ -4,6 +4,7 @@ A rule is enforced only where a concrete tool and the necessary server setting a
 
 | Rule | Executable control | Current status |
 | --- | --- | --- |
+| Release policy v1 metadata | `tools/policy.py handbook` + rejection tests | Owner/channels/required evidence/urgent route checked; publication readiness, timing and announcements remain manual |
 | Handbook/configuration consistency | `tools/policy.py handbook` | Implemented here |
 | Commit shape/body/breaking marker | `tools/policy.py commit` | Wired into owner-only product CI |
 | Current compiler/Gradle/CLI version agreement | `tools/policy.py versions` | Implemented; check declarations, not runtime execution |
@@ -20,3 +21,8 @@ The handbook CI checks its own policy and positive/negative cases. The compiler 
 Do not count a skipped required result as success. Keep a stable final gate name so a matrix-label change does not leave stale protection rules. Audit server rules through the API when adopting or changing them; comments in CODEOWNERS are not proof.
 
 Some facts remain manual: code understanding, justification, correct semantic version classification and rights to contribute. This table must not relabel those as automated.
+
+[Release policy v1](releases.md) is organization guidance. Its metadata check runs
+in handbook CI, not as a universal release approval gate. The product retains its
+explicitly pinned checker; new handbook rules are not silently auto-adopted by
+existing product workflows. No recurring scheduler is created by the review interval.

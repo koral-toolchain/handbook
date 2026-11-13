@@ -73,10 +73,27 @@ def check_versions(repo, policy=None):
     require(testing['engines']['node'] == pins['nodeMinimum'], 'Test-tool Node minimum differs from policy')
     return {'kotlin':kotlin,'gradle':gradle,'buildJdk':int(jdk),'version':version,'scope':'declaration consistency only; not a runtime matrix'}
 
+def check_release_policy(policy, owner):
+    """Check policy metadata, not release evidence or a publishing permission."""
+    require(policy['schema'] == 'koral-release-policy/1', 'Unsupported release policy schema')
+    require(type(policy['revision']) is int and policy['revision'] >= 1, 'Invalid policy revision')
+    require(policy['releaseOwner'] == owner, 'Release approval must retain the configured owner')
+    require(policy['channels'] == ['preview', 'stable'], 'Distinguish preview and stable channels')
+    require(type(policy['reviewEveryDays']) is int and policy['reviewEveryDays'] > 0, 'Invalid release review interval')
+    require(policy['automaticPublication'] is False, 'Policy v1 does not enable automatic publication')
+    conditions = policy['publicationConditions']
+    require(isinstance(conditions, list) and len(conditions) == len(set(conditions)), 'Duplicate publication conditions')
+    require({'required-ci', 'candidate-install', 'behavior-regression', 'documentation',
+             'artifact-integrity', 'owner-approval'}.issubset(conditions), 'Missing publication condition')
+    require(policy['announcementMode'] == 'selective-user-outcome', 'Announcements must remain selective')
+    require(set(policy['urgentReasons']) == {'security', 'incorrect-results', 'installation-blocked'}, 'Missing urgent release route')
+
+
 def check_handbook(root=ROOT):
     root = Path(root)
     policy = json.loads((root/'config/koral-solana.json').read_text())
     require(policy['owner'] == 'tidemark-labs', 'Unexpected owner')
+    check_release_policy(json.loads((root/'config/release-policy.json').read_text()), policy['owner'])
     for key in ['requiredJobs','releaseRequiredJobs']:
         require(len(policy[key]) == len(set(policy[key])) > 0, 'Required jobs must be unique and non-empty')
     require(set(policy['requiredJobs']).issubset(policy['releaseRequiredJobs']), 'Release gates must retain PR gates')
