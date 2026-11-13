@@ -52,3 +52,10 @@ Release tags matching v* reject updates/deletion through an active tag ruleset
 with no bypass actors. Publication is currently owner-initiated manual promotion,
 not an automatic GitHub publishing workflow. Original Koral usage permissions
 remain restricted by LICENSE; release publication does not grant additional rights.
+
+## Release decision
+
+Follow [organization release policy v1](../guides/releases.md) and the product
+[release checklist](https://github.com/koral-toolchain/koral-solana/blob/main/docs/RELEASING.md).
+Source-only changes stay Unreleased until a new verified artifact is promoted.
+The current development work and original preview archive are separate revisions.
