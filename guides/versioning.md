@@ -14,7 +14,7 @@ Use Semantic Versioning. For the initial 0.x preview, patch releases preserve th
 
 Machine-detectable differences require human classification. A declaration/ABI dump cannot decide whether a behavioral change is safe. ABI changes must reject incompatible state safely or specify an explicit migration; never reinterpret an old same-sized account silently.
 
-One product-version source should feed Gradle metadata, CLI identity, build manifests, archive names, tags and release notes. The current implementation contains duplicated version literals; the executable pin checker detects drift, while a future refactor should remove duplication. The initial baseline is `0.1.0-dev`; a release candidate could be `0.1.0-preview.1` after an actual version change.
+One product-version source should feed Gradle metadata, CLI identity, build manifests, archive names, tags and release notes. The current implementation contains duplicated version literals; the executable pin checker detects drift, while a future refactor should remove duplication. The initial published baseline is `0.1.0-dev`. The current policy pin selects `0.2.0-preview.1` for the next candidate: backward-compatible account constraints, owned-state SOL vault operations and project workflows are grouped into a minor preview. Updating this pin does not publish or approve an artifact. Existing product revisions retain their explicitly pinned older handbook checker.
 
 Dependency/compiler/SDK changes are dedicated reviewed changes with locks and regression evidence. A test-version range is not blanket support for all future versions. Published versions and tags are immutable. Fix a bad release with a new version; do not overwrite its bytes.
 
