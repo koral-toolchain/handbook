@@ -41,7 +41,7 @@
     "gradle": "8.14.6",
     "gradleSha256": "7988ed071b2a07900e2ec715fca15c6ab72bce6db433af301fa7fa7e9407bd24",
     "buildJdk": 17,
-    "productVersion": "0.1.0-dev",
+    "productVersion": "0.2.0-preview.1",
     "nodeMinimum": ">=22.12"
   },
   "proposedQualification": {
