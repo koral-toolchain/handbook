@@ -54,12 +54,12 @@ class PolicyTests(unittest.TestCase):
             with self.subTest(field=field),self.assertRaises(ValueError):
                 p.check_release_policy(bad, 'tidemark-labs')
     def fixture(self,root):
-        files={'build.gradle.kts':'plugins { kotlin("jvm") version "2.2.21" }\nversion = "0.2.0-preview.1"\njvmToolchain(17)\n','compiler/build.gradle.kts':'implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21")','gradle/wrapper/gradle-wrapper.properties':'distributionUrl=https://services.gradle.org/distributions/gradle-8.14.6-bin.zip\ndistributionSha256Sum='+p.config()['pins']['gradleSha256']+'\n','cli/src/main/kotlin/dev/koral/cli/Main.kt':'println("Koral 0.2.0-preview.1\\n")\n"compiler" to "koral-0.2.0-preview.1"','testing/package.json':json.dumps({'engines':{'node':'>=22.12'}})}
+        files={'build.gradle.kts':'plugins { kotlin("jvm") version "2.2.21" }\nversion = "0.3.0-preview.1"\njvmToolchain(17)\n','compiler/build.gradle.kts':'implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21")','gradle/wrapper/gradle-wrapper.properties':'distributionUrl=https://services.gradle.org/distributions/gradle-8.14.6-bin.zip\ndistributionSha256Sum='+p.config()['pins']['gradleSha256']+'\n','cli/src/main/kotlin/dev/koral/cli/Main.kt':'println("Koral 0.3.0-preview.1\\n")\n"compiler" to "koral-0.3.0-preview.1"','testing/package.json':json.dumps({'engines':{'node':'>=22.12'}})}
         for name,text in files.items():
             f=root/name;f.parent.mkdir(parents=True,exist_ok=True);f.write_text(text)
     def test_accepts_matching_versions(self):
         with tempfile.TemporaryDirectory() as d:
-            root=Path(d);self.fixture(root);self.assertEqual(p.check_versions(root)['version'],'0.2.0-preview.1')
+            root=Path(d);self.fixture(root);self.assertEqual(p.check_versions(root)['version'],'0.3.0-preview.1')
     def test_rejects_compiler_version_drift(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fixture(root)
@@ -68,13 +68,13 @@ class PolicyTests(unittest.TestCase):
     def test_rejects_cli_version_drift(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fixture(root)
-            f=root/'cli/src/main/kotlin/dev/koral/cli/Main.kt';f.write_text(f.read_text().replace('Koral 0.2.0-preview.1','Koral 0.1.1'))
+            f=root/'cli/src/main/kotlin/dev/koral/cli/Main.kt';f.write_text(f.read_text().replace('Koral 0.3.0-preview.1','Koral 0.1.1'))
             with self.assertRaises(ValueError):p.check_versions(root)
     def test_rejects_old_product_even_when_declarations_agree(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fixture(root)
             for name in ['build.gradle.kts','cli/src/main/kotlin/dev/koral/cli/Main.kt']:
-                f=root/name;f.write_text(f.read_text().replace('0.2.0-preview.1','0.1.0-dev'))
+                f=root/name;f.write_text(f.read_text().replace('0.3.0-preview.1','0.1.0-dev'))
             with self.assertRaisesRegex(ValueError,'policy versions disagree'):
                 p.check_versions(root)
     def test_rejects_wrapper_integrity_change(self):
