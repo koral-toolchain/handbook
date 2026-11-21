@@ -8,6 +8,7 @@
   "files": {
     "cli/build.gradle.kts": "e362d9203791a60825d5a0495ad818feab6302f599101c5cd31b69f70fd57cd8",
     "cli/src/test/kotlin/dev/koral/cli/ArchitectureTest.kt": "03061d9a0ae361d94a6e8e55155a6ce3781a15c96b75b656e526fec29b64a70a",
+    "config/governance.json": "b2164806a79fd6b7e02036fc07cfedcdcd6a9adb37d174118959f429a2d07a7d",
     "docs/ENGINEERING.md": "32c097341ed4226ea98a81b030bfd4c93c9bd2549cc6030813ffe66936d8b92e",
     "pipeline/build.gradle.kts": "f6c5130ce2249b88b3a26d78a8576e541763a8fce55fa480b5c0945f89f19079",
     "pipeline/gradle.lockfile": "cc4dc28aa4ae12d40bd06fe1ac26361a66efd5c8313f4533b04a66b6bfa8cd66",
