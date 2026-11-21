@@ -79,6 +79,20 @@ class PolicyTests(unittest.TestCase):
             (main.parent/'Project.kt').write_text('val readme = "Koral project"')
             self.assertEqual(p.check_versions(root)['version'],'0.3.0-preview.1')
 
+    def test_pipeline_manifest_is_unique_and_matches_the_release(self):
+        for mode in ['matching', 'duplicate', 'drift']:
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as d:
+                root=Path(d);self.fixture(root)
+                main=root/'cli/src/main/kotlin/dev/koral/cli/Main.kt'
+                identity,manifest=main.read_text().split('\n',1)
+                if mode != 'duplicate':main.write_text(identity)
+                pipeline=root/'pipeline/src/main/kotlin/dev/koral/pipeline/CompilerPipeline.kt'
+                pipeline.parent.mkdir(parents=True)
+                pipeline.write_text(manifest.replace('0.3.0-preview.1','0.1.0-dev') if mode=='drift' else manifest)
+                if mode=='matching':self.assertEqual(p.check_versions(root)['version'],'0.3.0-preview.1')
+                else:
+                    with self.assertRaises(ValueError):p.check_versions(root)
+
     def test_rejects_compiler_version_drift(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fixture(root)
