@@ -6,7 +6,7 @@
   "decision": "accepted-maintainer-scope",
   "reason": "Owner requested controls before capabilities: dependency readiness/offline probes, base-trusted critical policy scopes and exact runtime archive identity. No language or website feature.",
   "files": {
-    ".github/workflows/ci.yml": "c17718017585b1131b52d3189eae1a7dbfef8f82d89d17dadf2c217ef3670138",
+    ".github/workflows/ci.yml": "58a96f4d19ea2140816f753498470abcd14f12e4a8ef32e9f5807c9893b03bdf",
     ".github/workflows/native.yml": "e2489ec7e548c0efcc668bb73d90ab5029468b114aca3126a67aafec558e48c1",
     ".gitignore": "55a38d2a592fd283577713eb553de7286a61f08b26b47774f59ecc07b14a0589",
     "AGENTS.md": "6f32678f8805b4fd4e93c390a2d64eebac60034160d04dc294fe4dc37972f3f6",
@@ -20,6 +20,7 @@
     "tools/quality/probe.py": "d517c8abd398e3cf1db491f49a522660c58c78d2ecca6e0e5ec975f865641562",
     "tools/quality/test_checks.py": "4e56940d5b71a7d347233c6ffe886df3b9138f5409301cc241327c9f9571513a",
     "tools/quality/test_prepare.py": "1bb4d77e1367cc2af182810a994f3f4357a4b129bd6a3a8d1725c62c787e98b6",
-    "tools/quality/test_probe.py": "2f4861fe5940e74288b45c75e2d4e32695834260fceda256f7774520f9030c02"
+    "tools/quality/test_probe.py": "2f4861fe5940e74288b45c75e2d4e32695834260fceda256f7774520f9030c02",
+    "tools/quality/test_workflow.py": "f7dd7cdfd5696a5ed1128ea15c78d56624d4892fab865204e7b88884e67d14c4"
   }
 }
