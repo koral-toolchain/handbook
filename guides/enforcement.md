@@ -27,4 +27,23 @@ in handbook CI, not as a universal release approval gate. The product retains it
 explicitly pinned checker; new handbook rules are not silently auto-adopted by
 existing product workflows. No recurring scheduler is created by the review interval.
 
-Engineering revision 1 is defined in [engineering.md](engineering.md). Adoption is pending in the product until its explicit handbook pin and hosted quality gate succeed; do not infer enforcement from this policy merge.
+Engineering revision 1 is defined in [engineering.md](engineering.md). The product
+adopted the checker/configuration at pinned handbook commit
+`e5d7ac587cb700ab094d86df5428f5e5654d4c37` through
+[product PR #30](https://github.com/koral-toolchain/koral-solana/pull/30), merged as
+`dc2b96a9f9d572a74a1fea074a76721a51503f2c`. All seven PR jobs succeeded in
+[the verified run](https://github.com/koral-toolchain/koral-solana/actions/runs/44856504804).
+The landed source tree equals the tested PR tree.
+
+The required quality job checks pinned Kotlin/JS/Python formatting, selected
+non-type-resolved detekt rules, actual bytecode dependency boundaries, repository
+and local-link boundaries, actual issue/PR explanations and governed policy PR
+types. Extracted-candidate jobs enforce runtime archive contents. Real controlled
+formatting, long-method and wrong-checksum probes were rejected before positive
+checks passed. Main protection requires the final gate including administrators.
+
+These are concrete product controls, not an organization-wide automatic rollout.
+Product value, semantic scope, justified exceptions and prose accuracy still need
+owner review. No release/publication or broader platform qualification follows
+from adoption. Later handbook documentation updates do not silently update the
+product's pinned executable policy.
