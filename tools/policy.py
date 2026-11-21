@@ -67,7 +67,7 @@ def check_versions(repo, policy=None):
     checksum = one(r'^distributionSha256Sum=([a-f0-9]{64})$', wrapper, 'wrapper checksum')
     require(gradle == pins['gradle'] and checksum == pins['gradleSha256'], 'Gradle wrapper/checksum differs from policy')
     version = one(r'^\s*version\s*=\s*"([^"]+)"', build, 'product version')
-    cli_version = one(r'Koral ([^\s"\\]+)', cli, 'CLI identity')
+    cli_version = one(r'Koral ([^\s"\\]+)', (repo/'cli/src/main/kotlin/dev/koral/cli/Main.kt').read_text(), 'CLI identity')
     manifest_version = one(r'"compiler"\s+to\s+"koral-([^"]+)"', cli, 'build manifest version')
     require(version == cli_version == manifest_version == pins['productVersion'], 'Gradle, CLI, manifest and policy versions disagree')
     require(testing['engines']['node'] == pins['nodeMinimum'], 'Test-tool Node minimum differs from policy')
