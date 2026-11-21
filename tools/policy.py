@@ -52,7 +52,8 @@ def check_versions(repo, policy=None):
     build = (repo/'build.gradle.kts').read_text()
     compiler = (repo/'compiler/build.gradle.kts').read_text()
     wrapper = (repo/'gradle/wrapper/gradle-wrapper.properties').read_text()
-    cli = '\n'.join(p.read_text() for p in sorted((repo/'cli/src/main/kotlin').rglob('*.kt')))
+    source_roots = [repo/'cli/src/main/kotlin', repo/'pipeline/src/main/kotlin']
+    identity_sources = '\n'.join(p.read_text() for root in source_roots for p in sorted(root.rglob('*.kt')))
     testing = json.loads((repo/'testing/package.json').read_text())
     def one(pattern, text, label):
         matches = re.findall(pattern, text, re.M)
@@ -68,7 +69,7 @@ def check_versions(repo, policy=None):
     require(gradle == pins['gradle'] and checksum == pins['gradleSha256'], 'Gradle wrapper/checksum differs from policy')
     version = one(r'^\s*version\s*=\s*"([^"]+)"', build, 'product version')
     cli_version = one(r'Koral ([^\s"\\]+)', (repo/'cli/src/main/kotlin/dev/koral/cli/Main.kt').read_text(), 'CLI identity')
-    manifest_version = one(r'"compiler"\s+to\s+"koral-([^"]+)"', cli, 'build manifest version')
+    manifest_version = one(r'"compiler"\s+to\s+"koral-([^"]+)"', identity_sources, 'build manifest version')
     require(version == cli_version == manifest_version == pins['productVersion'], 'Gradle, CLI, manifest and policy versions disagree')
     require(testing['engines']['node'] == pins['nodeMinimum'], 'Test-tool Node minimum differs from policy')
     return {'kotlin':kotlin,'gradle':gradle,'buildJdk':int(jdk),'version':version,'scope':'declaration consistency only; not a runtime matrix'}

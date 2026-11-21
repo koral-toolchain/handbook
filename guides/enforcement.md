@@ -78,3 +78,10 @@ These checks do not prove independent human intent or upstream authenticity.
 The owner still reviews scope and controls workflow administration. New product
 capabilities are paused by owner direction while procedural controls are hardened.
 No release assets, language capability or website deployment changed.
+
+Manifest identity checks inspect main Kotlin sources in both the CLI and shared
+pipeline module. Exactly one explicit manifest compiler version must agree with
+Gradle, CLI identity and the pinned product version. This supports moving the
+writer without accepting duplicate or drifting declarations. Dedicated tests cover
+the legacy CLI writer, pipeline writer, duplicate writer and mismatched version.
+Product adoption requires an explicit checker-pin update and governed scope record.
