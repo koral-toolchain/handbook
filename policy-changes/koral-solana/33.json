@@ -1,0 +1,19 @@
+{
+  "schema": "koral-policy-change/1",
+  "repository": "koral-toolchain/koral-solana",
+  "issue": 33,
+  "baseCommit": "83a43718a04d10e4097e4b9d4b9460253ca98eae",
+  "decision": "accepted-maintainer-scope",
+  "reason": "Owner approved responsibility-based names, shared JVM pipeline and complete bytecode dependency controls before new capabilities. Exact module/build/test/consumer/documentation changes preserve existing contract semantics and output.",
+  "files": {
+    "cli/build.gradle.kts": "e362d9203791a60825d5a0495ad818feab6302f599101c5cd31b69f70fd57cd8",
+    "cli/src/test/kotlin/dev/koral/cli/ArchitectureTest.kt": "03061d9a0ae361d94a6e8e55155a6ce3781a15c96b75b656e526fec29b64a70a",
+    "docs/ENGINEERING.md": "32c097341ed4226ea98a81b030bfd4c93c9bd2549cc6030813ffe66936d8b92e",
+    "pipeline/build.gradle.kts": "f6c5130ce2249b88b3a26d78a8576e541763a8fce55fa480b5c0945f89f19079",
+    "pipeline/gradle.lockfile": "cc4dc28aa4ae12d40bd06fe1ac26361a66efd5c8313f4533b04a66b6bfa8cd66",
+    "settings.gradle.kts": "d5b979b3710ecfadba7bd91d04edbeb5ead6f9321655f2c73e85dff287293b7f",
+    "tools/ci/PipelineSmoke.java": "efbedf051970e4e9d13ede327ecf51878504cfd700bbac06181584059d7563bc",
+    "tools/ci/consumer.py": "6647830e6307c2f83800b23567cc390731f56673ef03c14d799b3b689accaa3c",
+    "tools/quality/check.py": "1198a84a3a867a1338c5a871c96c5ee3d7f14672e868128d82e9aa62fe8d8fb9"
+  }
+}
