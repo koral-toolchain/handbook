@@ -85,3 +85,39 @@ Gradle, CLI identity and the pinned product version. This supports moving the
 writer without accepting duplicate or drifting declarations. Dedicated tests cover
 the legacy CLI writer, pipeline writer, duplicate writer and mismatched version.
 Product adoption requires an explicit checker-pin update and governed scope record.
+
+## Shared compiler pipeline adoption
+
+[Product PR #34](https://github.com/koral-toolchain/koral-solana/pull/34) merged as
+`13f1fb2cc63dd8116ae06a7666213ecd2b615cdb` after all seven jobs succeeded in
+[PR run 44876004872](https://github.com/koral-toolchain/koral-solana/actions/runs/44876004872).
+Tested and landed trees both equal `4a6f36026e1d9c0dc1a87c21ec98e42a858c94db`.
+[Post-merge main verification](https://github.com/koral-toolchain/koral-solana/actions/runs/44876577523) also completed successfully, with all seven jobs passing.
+
+The product uses responsibility names kotlin, ir, validation, target.c and abi,
+with pipeline as the shared JVM/CLI compilation coordinator. Its production
+bytecode must follow an explicit nine-role dependency table, and every production
+class must have exactly one role. Real compiled Java fixtures demonstrate that
+all 56 forbidden directions are rejected. This replaces the earlier incomplete
+manual direction list.
+
+Extracted candidates compile a consumer driver against installed JARs and call the
+JVM pipeline without CLI handlers. Library/CLI C, ABI and SBF must match, and failed
+source must invalidate old success artifacts. Four maintained contracts also had
+identical generated C/ABI/SBF before and after on the same local SDK; that is not
+a new gas/CU benchmark or a general compiler-correctness proof.
+
+The adopted version checker is pinned at
+`f0d5a89842e9a2ebac2a99ad2106058a31b65a6b`; its separately merged issue #33 scope
+record is `c37af9c62778cc44eeb11706bb00250700f35151` and binds ten critical files
+to base `83a43718a04d10e4097e4b9d4b9460253ca98eae`. Initial PR checks correctly
+blocked a CLI-only writer assumption and then a stale scope; checker tests and an
+updated explicit scope resolved them. Versions and unique-identity checks were not
+relaxed. Later documentation does not change either pinned identity.
+
+Internal JVM packages changed and implementation-level callers must update their
+imports. Existing contract semantics, wire ABI and runtime C remain unchanged.
+The public 0.3.0-preview.1 assets/tag were not replaced. No JNI layer, new compiler
+process boundary, language capability, website deployment or release follows from
+this refactor. Role boundaries are product-specific decisions, not a ban on all
+necessary cross-component calls or an organization-wide automatic integration.
