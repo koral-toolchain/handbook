@@ -55,6 +55,8 @@ def verify(product, records, base, head, body, repository, policy):
     number = int(issue[1])
     raw = git(records, 'show', f'{ref}:policy-changes/koral-solana/{number}.json')
     record = json.loads(raw)
+    active = json.loads(git(records, 'show', f'origin/main:policy-changes/koral-solana/{number}.json'))
+    require(record == active, 'Policy record was superseded or withdrawn on handbook main')
     actual = {}
     for name in governed:
         listing = git(product, 'ls-tree', head, '--', name).decode().strip()

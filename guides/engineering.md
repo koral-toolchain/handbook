@@ -34,7 +34,7 @@ merged handbook data record bound to a product issue, exact base commit and SHA-
 of every resulting critical file (including deletion). A PR title alone is not a
 scope decision. Reusing a record for different bytes, another issue or an advanced
 base fails. Record data is never executed and its commit must be an ancestor of
-handbook main. Record commits are referenced in PR bodies, avoiding a digest/pin
+handbook main; the selected record must still equal the active main record, so superseded or withdrawn scopes cannot be replayed. Record commits are referenced in PR bodies, avoiding a digest/pin
 self-reference cycle.
 
 The initial adoption is explicitly bootstrapped from product dc2b96a. Later
