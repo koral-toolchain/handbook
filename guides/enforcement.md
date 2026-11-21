@@ -47,3 +47,12 @@ Product value, semantic scope, justified exceptions and prose accuracy still nee
 owner review. No release/publication or broader platform qualification follows
 from adoption. Later handbook documentation updates do not silently update the
 product's pinned executable policy.
+
+## Control-hardening follow-up
+
+The seven successful PR checks above are not a claim that every later main run
+succeeded. Post-merge run 44857096234 failed during dependency resolution before a
+negative probe could run. Product issue #31 tracks positive preparation/offline
+probe separation, base-trusted critical scope and exact runtimeClasspath archive
+identity. Revision 2 adoption requires its own PR and post-merge evidence; a merged
+scope record alone is not release readiness or independent approval evidence.

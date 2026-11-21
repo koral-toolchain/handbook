@@ -1,0 +1,26 @@
+{
+  "schema": "koral-policy-change/1",
+  "repository": "koral-toolchain/koral-solana",
+  "issue": 31,
+  "baseCommit": "dc2b96a9f9d572a74a1fea074a76721a51503f2c",
+  "decision": "accepted-maintainer-scope",
+  "reason": "Owner requested controls before capabilities: dependency readiness/offline probes, base-trusted critical policy scopes and exact runtime archive identity. No language or website feature.",
+  "files": {
+    ".github/workflows/ci.yml": "df99614773bf88bca5f0a2b96bc8f5ee8658aaf611bf081ec91e613a8d5c4d2b",
+    ".github/workflows/native.yml": "e2489ec7e548c0efcc668bb73d90ab5029468b114aca3126a67aafec558e48c1",
+    ".gitignore": "55a38d2a592fd283577713eb553de7286a61f08b26b47774f59ecc07b14a0589",
+    "AGENTS.md": "6f32678f8805b4fd4e93c390a2d64eebac60034160d04dc294fe4dc37972f3f6",
+    "cli/build.gradle.kts": "5fd21dfefbe7d21c8ffc154e94bd916927f61125046e452f9a9cdffbfb248a1e",
+    "config/engineering.json": "3fdd526be31069bc992f6371ba79a9a1c38e046cf214275c350af1f6ab7affaa",
+    "config/governance.json": "1f128a9b47f9b4360e989925a090a2e6789f526e35ffe44571da1248e7ff9b25",
+    "docs/ENGINEERING.md": "1a774488da64d67542baec3531c9c899bd4b100bc3f19c50dcafd35b2603bc57",
+    "tools/ci/consumer.py": "e47d2457c46fa4cea852d77b61310887aeb4be28bf11afeaebc184468b4d9dfc",
+    "tools/quality/check.py": "e5c7fd3da84daf0cb43b836f74af0315a899cbe0c4b81c28cf8c60d4cf402802",
+    "tools/quality/prepare.py": "95a6d22ec007257711dc30e3ad0c9ef6682e4f880838df158e66681637d0270f",
+    "tools/quality/probe.py": "d517c8abd398e3cf1db491f49a522660c58c78d2ecca6e0e5ec975f865641562",
+    "tools/quality/test_checks.py": "4e56940d5b71a7d347233c6ffe886df3b9138f5409301cc241327c9f9571513a",
+    "tools/quality/test_prepare.py": "1bb4d77e1367cc2af182810a994f3f4357a4b129bd6a3a8d1725c62c787e98b6",
+    "tools/quality/test_probe.py": "2f4861fe5940e74288b45c75e2d4e32695834260fceda256f7774520f9030c02",
+    "tools/quality/test_workflow.py": "088379bd2b5152b67e2c4bdd212ad1b5e1bfcb8abe0fa8b357fda72eae7d969c"
+  }
+}

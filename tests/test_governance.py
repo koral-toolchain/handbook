@@ -64,4 +64,16 @@ class GovernanceGitTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'Policy-Record'):
                 g.verify(product,records,base,head,'build(ci): title alone',record['repository'],policy)
 
+class PublishedRecordTests(unittest.TestCase):
+    def test_published_records_have_valid_scope_shapes(self):
+        import json
+        policy=json.loads((g.ROOT/'config/governance.json').read_text())
+        for path in (g.ROOT/'policy-changes/koral-solana').glob('*.json'):
+            record=json.loads(path.read_text())
+            self.assertRegex(record['baseCommit'],'^[a-f0-9]{40}$')
+            self.assertEqual(str(record['issue']),path.stem)
+            self.assertTrue(record['files'])
+            self.assertEqual(g.critical_paths(record['files'],policy),sorted(record['files']))
+            g.validate_record(record,'koral-toolchain/koral-solana',record['issue'],record['baseCommit'],record['files'])
+
 if __name__=='__main__':unittest.main()
