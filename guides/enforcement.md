@@ -37,8 +37,7 @@ The landed source tree equals the tested PR tree.
 
 The required quality job checks pinned Kotlin/JS/Python formatting, selected
 non-type-resolved detekt rules, actual bytecode dependency boundaries, repository
-and local-link boundaries, actual issue/PR explanations and governed policy PR
-types. Extracted-candidate jobs enforce runtime archive contents. Real controlled
+and local-link boundaries, actual issue/PR explanations and the revision-1 policy PR title rule (superseded by the revision-2 scope record). Extracted-candidate jobs enforce runtime archive contents. Real controlled
 formatting, long-method and wrong-checksum probes were rejected before positive
 checks passed. Main protection requires the final gate including administrators.
 
@@ -56,3 +55,26 @@ negative probe could run. Product issue #31 tracks positive preparation/offline
 probe separation, base-trusted critical scope and exact runtimeClasspath archive
 identity. Revision 2 adoption requires its own PR and post-merge evidence; a merged
 scope record alone is not release readiness or independent approval evidence.
+
+## Engineering revision 2 adoption
+
+[Product PR #32](https://github.com/koral-toolchain/koral-solana/pull/32) merged as
+`83a43718a04d10e4097e4b9d4b9460253ca98eae` after all seven jobs succeeded in
+[PR run 44862799177](https://github.com/koral-toolchain/koral-solana/actions/runs/44862799177).
+Tested and landed trees both equal `efbf6e6d3882aac73fc2e201b416b93e13158c43`.
+[Post-merge main run 44863330571](https://github.com/koral-toolchain/koral-solana/actions/runs/44863330571) finished successfully. Its first quality attempt exhausted bounded retries on Maven Central HTTP 429 before probes; one failed-jobs rerun of the same commit passed quality and the final gate. No source, rule, checksum or lock change was used for recovery. The original failure remains in attempt 1.
+
+The executable checker is pinned independently at
+`7ec0ab17c05940a676e91cc71037b349b4532629`; the separately merged data record is
+`19576a616644d67ddf53c02c695f33ba0ac6b3f7`, scoped to product issue #31, exact base
+`dc2b96a9f9d572a74a1fea074a76721a51503f2c` and sixteen critical-file digests.
+The guard rejects stale/unmerged scopes and changed file bytes. Manual verification
+is main-only and PRs target protected main. Positive dependency preparation precedes
+offline formatting/long-method/checksum probes, followed by restored positive checks.
+Extracted archives must match a separate Gradle runtimeClasspath manifest in exact
+JAR names and SHA-256 values; missing, injected, duplicated or replaced JARs fail.
+
+These checks do not prove independent human intent or upstream authenticity.
+The owner still reviews scope and controls workflow administration. New product
+capabilities are paused by owner direction while procedural controls are hardened.
+No release assets, language capability or website deployment changed.
