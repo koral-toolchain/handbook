@@ -1,6 +1,6 @@
 # Controlled engineering
 
-Status: policy adopted in this handbook; each product must explicitly pin and implement it. This document alone does not enable a product gate. The authoritative identifiers and references are in [engineering.json](../config/engineering.json).
+Status: policy adopted in this handbook; Koral Solana adopted it through product PR #30. Each additional product must explicitly pin and implement it. This document alone does not enable a product gate. The authoritative identifiers and references are in [engineering.json](../config/engineering.json).
 
 Every non-trivial change starts with an issue describing the user outcome, acceptance criteria and exclusions. A PR links the actual issue and records scope, acceptance, exclusions, validation and compatibility. A checker can verify structure and issue identity; only the owner decides whether a feature belongs in the product. Closed external contributions and the sole maintainer remain unchanged.
 
