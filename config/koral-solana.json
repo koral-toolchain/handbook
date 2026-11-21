@@ -66,6 +66,7 @@
     "qualifiedMatrixAlreadyExecuted": false
   },
   "requiredJobs": [
+    "quality",
     "policy",
     "unit",
     "sbf-integration",
@@ -74,6 +75,7 @@
   ],
   "publishedGradlePluginExists": false,
   "releaseRequiredJobs": [
+    "quality",
     "policy",
     "unit",
     "sbf-integration",

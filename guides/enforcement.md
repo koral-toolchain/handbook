@@ -26,3 +26,5 @@ Some facts remain manual: code understanding, justification, correct semantic ve
 in handbook CI, not as a universal release approval gate. The product retains its
 explicitly pinned checker; new handbook rules are not silently auto-adopted by
 existing product workflows. No recurring scheduler is created by the review interval.
+
+Engineering revision 1 is defined in [engineering.md](engineering.md). Adoption is pending in the product until its explicit handbook pin and hosted quality gate succeed; do not infer enforcement from this policy merge.
