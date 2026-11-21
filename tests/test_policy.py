@@ -53,6 +53,15 @@ class PolicyTests(unittest.TestCase):
             bad=self.release_policy();bad[field]=value
             with self.subTest(field=field),self.assertRaises(ValueError):
                 p.check_release_policy(bad, 'tidemark-labs')
+    def test_engineering_requires_controls_and_complete_gate(self):
+        engineering=json.loads((p.ROOT/'config/engineering.json').read_text())
+        p.check_engineering(engineering,p.config())
+        for field in ['rules','requiredJobs','requiredPrSections']:
+            bad=json.loads(json.dumps(engineering));bad[field]=bad[field][1:]
+            with self.subTest(field=field),self.assertRaises(ValueError):p.check_engineering(bad,p.config())
+        bad=json.loads(json.dumps(engineering));bad['rules'][0]['review']=''
+        with self.assertRaises(ValueError):p.check_engineering(bad,p.config())
+
     def fixture(self,root):
         files={'build.gradle.kts':'plugins { kotlin("jvm") version "2.2.21" }\nversion = "0.3.0-preview.1"\njvmToolchain(17)\n','compiler/build.gradle.kts':'implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21")','gradle/wrapper/gradle-wrapper.properties':'distributionUrl=https://services.gradle.org/distributions/gradle-8.14.6-bin.zip\ndistributionSha256Sum='+p.config()['pins']['gradleSha256']+'\n','cli/src/main/kotlin/dev/koral/cli/Main.kt':'println("Koral 0.3.0-preview.1\\n")\n"compiler" to "koral-0.3.0-preview.1"','testing/package.json':json.dumps({'engines':{'node':'>=22.12'}})}
         for name,text in files.items():

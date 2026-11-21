@@ -52,7 +52,7 @@ def check_versions(repo, policy=None):
     build = (repo/'build.gradle.kts').read_text()
     compiler = (repo/'compiler/build.gradle.kts').read_text()
     wrapper = (repo/'gradle/wrapper/gradle-wrapper.properties').read_text()
-    cli = (repo/'cli/src/main/kotlin/dev/koral/cli/Main.kt').read_text()
+    cli = '\n'.join(p.read_text() for p in sorted((repo/'cli/src/main/kotlin').rglob('*.kt')))
     testing = json.loads((repo/'testing/package.json').read_text())
     def one(pattern, text, label):
         matches = re.findall(pattern, text, re.M)
@@ -89,11 +89,27 @@ def check_release_policy(policy, owner):
     require(set(policy['urgentReasons']) == {'security', 'incorrect-results', 'installation-blocked'}, 'Missing urgent release route')
 
 
+def check_engineering(engineering, policy):
+    require(engineering['schema'] == 'koral-engineering/1', 'Unsupported engineering schema')
+    require(engineering['owner'] == policy['owner'], 'Engineering owner changed')
+    require(engineering['revision'] == 1, 'Unsupported engineering revision')
+    expected = {'ENG-%02d' % n for n in range(1, 11)}
+    rules = engineering['rules']
+    require(len(rules) == len(expected) and {r['id'] for r in rules} == expected, 'Missing or duplicate engineering rule')
+    for rule in rules:
+        require(all(isinstance(rule[k], str) and rule[k].strip() for k in ['area','requirement','control','review']), 'Incomplete engineering rule')
+    require(engineering['requiredJobs'] == policy['requiredJobs'], 'Engineering gate drift')
+    require(engineering['requiredPrSections'] == ['Scope','Acceptance','Exclusions','Validation','Compatibility'], 'Missing scope or evidence section')
+    require(all(urlsplit(url).scheme == 'https' for url in engineering['sources'].values()), 'References must use HTTPS')
+    require(all(re.fullmatch(r'[0-9]+(?:\.[0-9]+)+', v) for v in engineering['tools'].values()), 'Pin engineering tool versions')
+
+
 def check_handbook(root=ROOT):
     root = Path(root)
     policy = json.loads((root/'config/koral-solana.json').read_text())
     require(policy['owner'] == 'tidemark-labs', 'Unexpected owner')
     check_release_policy(json.loads((root/'config/release-policy.json').read_text()), policy['owner'])
+    check_engineering(json.loads((root/'config/engineering.json').read_text()), policy)
     for key in ['requiredJobs','releaseRequiredJobs']:
         require(len(policy[key]) == len(set(policy[key])) > 0, 'Required jobs must be unique and non-empty')
     require(set(policy['requiredJobs']).issubset(policy['releaseRequiredJobs']), 'Release gates must retain PR gates')

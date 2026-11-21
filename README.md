@@ -42,3 +42,5 @@ GitHub Free organization plans do not enforce protected branches for private rep
 ## Changes to rules
 
 Change the guide, policy configuration, checker and positive/negative tests together. Do not silently relax a check to make a pull request green. Rules about correctness and rights still need human judgement; automated checks cannot establish understanding, legal ownership or absence of all vulnerabilities.
+
+[Controlled engineering rules](guides/engineering.md) define scope, code, structure, evidence and exception controls. Product adoption requires a pinned integration.
