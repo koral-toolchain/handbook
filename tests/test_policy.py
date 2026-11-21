@@ -69,6 +69,16 @@ class PolicyTests(unittest.TestCase):
     def test_accepts_matching_versions(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fixture(root);self.assertEqual(p.check_versions(root)['version'],'0.3.0-preview.1')
+    def test_version_check_accepts_a_separate_manifest_writer(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);self.fixture(root)
+            main=root/'cli/src/main/kotlin/dev/koral/cli/Main.kt'
+            text=main.read_text();identity,manifest=text.split('\n',1)
+            main.write_text(identity)
+            (main.parent/'BuildCommand.kt').write_text(manifest)
+            (main.parent/'Project.kt').write_text('val readme = "Koral project"')
+            self.assertEqual(p.check_versions(root)['version'],'0.3.0-preview.1')
+
     def test_rejects_compiler_version_drift(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fixture(root)
