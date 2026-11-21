@@ -92,7 +92,7 @@ def check_release_policy(policy, owner):
 def check_engineering(engineering, policy):
     require(engineering['schema'] == 'koral-engineering/1', 'Unsupported engineering schema')
     require(engineering['owner'] == policy['owner'], 'Engineering owner changed')
-    require(engineering['revision'] == 1, 'Unsupported engineering revision')
+    require(engineering['revision'] == 2, 'Unsupported engineering revision')
     expected = {'ENG-%02d' % n for n in range(1, 11)}
     rules = engineering['rules']
     require(len(rules) == len(expected) and {r['id'] for r in rules} == expected, 'Missing or duplicate engineering rule')

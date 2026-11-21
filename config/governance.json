@@ -1,0 +1,25 @@
+{
+  "schema": "koral-governance/1",
+  "criticalPaths": [
+    ".github/*",
+    "config/*",
+    "tools/quality/*",
+    "tools/ci/*",
+    "tools/governance.py",
+    "*/build.gradle.kts",
+    "build.gradle.kts",
+    "settings.gradle.kts",
+    "gradle.properties",
+    "gradle/*",
+    "*/gradle.lockfile",
+    "gradlew",
+    "gradlew.bat",
+    ".editorconfig",
+    ".prettierrc.json",
+    "pyproject.toml",
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "docs/ENGINEERING.md",
+    "**/ArchitectureTest.kt"
+  ]
+}
